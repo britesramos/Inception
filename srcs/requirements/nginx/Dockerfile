@@ -26,6 +26,7 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 #Copy costum config file to the NGINX installation directory. (This way NGINX will read my costume config file instead of his default file, that I removed in a previous step.)
 COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
+#TODO: NOT SURE IF THIS IS NEEDED IN HERE OR IF IS JUST GOOD PRACTICE. (DOCKER COMPOSE IS ACTUALLY THE ONE CONTROLLING THIS.)
 EXPOSE 8443
 
 CMD ["nginx", "-g", "daemon off;"]
