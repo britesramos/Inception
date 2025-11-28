@@ -1,7 +1,7 @@
 #Container's OS(Debian) base image and the penultimate stable version(bookworm)
 FROM debian:bookworm
 
-RUN apt update && \
+RUN apt update -y && \
 	apt upgrade -y && \
 	apt install -y nginx openssl
 
