@@ -63,7 +63,8 @@ fclean: down
 	@echo "$(RED)Removing all containers, images, volumes, and data...$(NC)"
 	@docker-compose -f $(COMPOSE_FILE) down -v --rmi all
 	@docker system prune -af --volumes
-	@rm -rf $(DATA_DIR)
+	@echo "$(YELLOW)Removing data directories...$(NC)"
+	@docker run --rm -v $(DATA_DIR):/data alpine sh -c "rm -rf /data/*"
 	@echo "$(GREEN)Full clean complete!$(NC)"
 
 re: fclean all
