@@ -34,7 +34,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress_data:/var/www/wordpress
+      - wordpress_database:/var/www/wordpress
     networks:
       - inception
     ports:
