@@ -94,10 +94,10 @@ test-connection:
 	@echo "1. PHP-FPM process:"
 	@docker exec wordpress ps aux | grep php-fpm | grep -v grep || echo "❌ Not running"
 	@echo "\n2. Testing from host:"
-	@curl -L -k -s https://sramos.42.fr:443 | head -50
+	@curl -L -k -s https://sramos.42.fr | head -50
 
 test-curl:
-	@curl -v -k https://sramos.42.fr:443
+	@curl -v -k https://sramos.42.fr
 
 test-all: test-mariadb test-wordpress test-nginx test-connection
 
