@@ -4,7 +4,7 @@ services:
     image: mariadb
     container_name: mariadb
     volumes: 
-      - mariadb_data:/var/lib/mysql
+      - wordpress_database:/var/lib/mysql
     networks:
       - inception
     expose: 
@@ -19,7 +19,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wordpress_data:/var/www/wordpress
+      - wordpress_website_files:/var/www/wordpress
     networks:
       - inception
     expose:
@@ -43,13 +43,13 @@ services:
     env_file: .env
 
 volumes:
-  mariadb_data:
+  wordpress_database:
     driver: local
     driver_opts:
       type: none
       o: bind
       device: ${HOME}/data/mariadb
-  wordpress_data:
+  wordpress_website_files:
     driver: local
     driver_opts:
       type: none
