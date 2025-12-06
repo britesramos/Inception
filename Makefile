@@ -1,5 +1,5 @@
 NAME = inception
-DATA_DIR = $(HOME)/data
+DATA_DIR = home/sramos/data
 COMPOSE_FILE = srcs/docker-compose.yaml
 
 GREEN = \033[0;32m
