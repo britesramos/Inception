@@ -38,7 +38,7 @@ services:
     networks:
       - inception
     ports:
-      - "8443:8443"
+      - "443:443"
     restart: always
     env_file: .env
 
