@@ -1,7 +1,7 @@
 services:
   mariadb:
     build: ./requirements/mariadb
-    image: inception-mariadb
+    image: mariadb
     container_name: mariadb
     volumes: 
       - mariadb_data:/var/lib/mysql
@@ -14,7 +14,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    image: inception-wordpress
+    image: wordpress
     container_name: wordpress
     depends_on:
       - mariadb
@@ -29,7 +29,7 @@ services:
 
   nginx:
     build: ./requirements/nginx
-    image: inception-nginx
+    image: nginx
     container_name: nginx
     depends_on:
       - wordpress
