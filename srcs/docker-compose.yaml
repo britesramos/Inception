@@ -34,7 +34,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress_database:/var/www/wordpress
+      - wordpress_website_files:/var/www/wordpress
     networks:
       - inception
     ports:
@@ -48,13 +48,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data/mariadb
+      device: /home/sramos/data/mariadb
   wordpress_website_files:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data/wordpress
+      device: /home/sramos/data/wordpress
 
 networks:
   inception:
