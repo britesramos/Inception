@@ -14,6 +14,14 @@ until mysqladmin ping --silent; do
     sleep 1
 done
 
+#Secure the root account:
+echo "Securing root account..."
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
+mysql -u root -p${SQL_ROOT_PASSWORD} -e "DELETE FROM mysql.user WHERE User='';"
+mysql -u root -p${SQL_ROOT_PASSWORD} -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1', '%');"
+mysql -u root -p${SQL_ROOT_PASSWORD} -e "DROP DATABASE IF EXISTS test;"
+mysql -u root -p${SQL_ROOT_PASSWORD} -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
+
 #Create DB tables
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 
@@ -22,7 +30,7 @@ mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' I
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${SQL_ROOT_PASSWORD}' WITH GRANT OPTION;"
 mysql -e "FLUSH PRIVILEGES;"
 
-mysqladmin -p${SQL_ROOT_PASSWORD} shutdown
+mysqladmin -u root -p${SQL_ROOT_PASSWORD} shutdown
 
 #Starts MariaDB in the foreground, run as mysql user and forces server logs to stdout - which means that in docker with appear in docker logs.
 #With exec MariaDB becomes PID1 (If MariaDB crashes, the container will not keep running.)
