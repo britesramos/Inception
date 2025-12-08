@@ -3,7 +3,7 @@
 #Stop if anything fails in this script:
 set -e
 
-if [ ! -d "/var/lib/mysql/mysql" ]; then
+if [ ! -d "/var/lib/mysql/mysql" ] || [ ! -d "/var/lib/mysql/${SQL_DATABASE}" ]; then
     echo "First time setup - initializing MariaDB..."
 
 	#Start service ("service mysql start" - does the same as: "service mariadb start")
